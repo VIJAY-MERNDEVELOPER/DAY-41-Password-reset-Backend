@@ -105,7 +105,8 @@ router.post("/resetpassword/:id", async (req, res) => {
 
     if (id === user.verifier) {
       if (newPassword === confirmPassword) {
-        const password = generatePassword(newPassword);
+        const password = await generatePassword(newPassword);
+
         await updatePassword(email, password);
         const randomString = "";
         await updateVerifier(randomString, email);
